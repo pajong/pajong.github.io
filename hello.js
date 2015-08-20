@@ -2,21 +2,6 @@ var VpaidVideoPlayer = function() {
     this._slot = null;
     this._videoSlot = null;
     this._eventsCallbacks = {};
-    this._attributes = {
-        'companions' : '',
-        'desiredBitrate' : 256,
-        'duration' : 10,
-        'expanded' : false,
-        'height' : 0,
-        'icons' : '',
-        'linear' : false,
-        'remainingTime' : 10,
-        'skippableState' : false,
-        'viewMode' : 'normal',
-        'width' : 0,
-        'volume' : 1.0
-    };
-
     this._parameters = {};
 };
 
@@ -26,13 +11,15 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     this._slot = environmentVars.slot;
     this._videoSlot = environmentVars.videoSlot;
 
+    // Parse the incoming parameters
+    this._parameters = JSON.parse(creativeData['AdParameters']);
+
+    this._attributes = this._parameters['attributes'];
+
     this._attributes['width'] = width;
     this._attributes['height'] = height;
     this._attributes['viewMode'] = viewMode;
     this._attributes['desiredBitrate'] = desiredBitrate;
-
-    // Parse the incoming parameters
-    this._parameters = JSON.parse(creativeData['AdParameters']);
 
     if (this._attributes['linear']) {
         this._updateVideoSlot();
