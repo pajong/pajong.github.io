@@ -1,4 +1,6 @@
 var VpaidVideoPlayer = function() {
+  console.log(window.location.href);
+  console.log(location.href);
     this._slot = null;
     this._videoSlot = null;
     this._eventsCallbacks = {};
@@ -9,6 +11,8 @@ var VpaidVideoPlayer = function() {
 
 VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode, 
     desiredBitrate, creativeData, environmentVars) {
+  console.log(window.location.href);
+  console.log(location.href);
 
     this._slot = environmentVars.slot;
     this._videoSlot = environmentVars.videoSlot;
