@@ -13,7 +13,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
   
     // Parse the incoming parameters
     this._parameters = JSON.parse(creativeData['AdParameters']);
-    this._attributes = this._paramenters['attributes'];
+    this._attributes = this._parameters['attributes'];
 
     this._attributes['width'] = width;
     this._attributes['height'] = height;
