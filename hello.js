@@ -91,8 +91,8 @@ VpaidVideoPlayer.prototype.startAd = function() {
     var closeButton = document.createElement('button');
     closeButton.appendChild(document.createTextNode("Close"));
     closeButton.addEventListener('click', this.skipAd.bind(this), false);
-    img.appendChild(closeButton);
     this._slot.appendChild(img);
+    this._slot.appendChild(closeButton);
     img.addEventListener('click', this._adClickTrough.bind(this), false);
 };
 
