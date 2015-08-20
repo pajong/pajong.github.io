@@ -28,7 +28,6 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     this._callEvent('AdLoaded');
 };
 
-
 VpaidVideoPlayer.prototype._adClickTrough = function() {
     this._callEvent('AdClickThru');
 };
