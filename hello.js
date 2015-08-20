@@ -1,24 +1,10 @@
 var VpaidVideoPlayer = function() {
-  console.log(location.href);
     this._slot = null;
     this._videoSlot = null;
     this._eventsCallbacks = {};
-    this._attributes = {
-        'companions' : '',
-        'desiredBitrate' : 256,
-        'duration' : 10,
-        'expanded' : false,
-        'height' : 0,
-        'icons' : '',
-        'linear' : false,
-        'remainingTime' : 10,
-        'skippableState' : false,
-        'viewMode' : 'normal',
-        'width' : 0,
-        'volume' : 1.0
-    };
-
+    this._attributes = this._getAttributes();
     this._parameters = {};
+    console.log(this._attributes);
 };
 
 VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode, 
@@ -42,6 +28,33 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     
     this._callEvent('AdLoaded');
 };
+
+// gets attributes from url
+VpaidVideoPlayer.prototype._getAttributes = function() {
+  // default params
+  var params = {
+        'companions' : '',
+        'desiredBitrate' : 256,
+        // 'duration' : 10,
+        'expanded' : false,
+        'height' : 0,
+        'icons' : '',
+        // 'linear' : false,
+        // 'remainingTime' : 10,
+        'skippableState' : false,
+        'viewMode' : 'normal',
+        'width' : 0,
+        'volume' : 1.0
+    };
+
+  var parser = window.location.href.split('hello.js?')[1].split('&');
+  for (var i = 0; i < parser.length; i++) {
+    var name = parser[i].split('=')[0];
+    var val = parser[i].split('=')[1];
+    params[name] = val;  
+  }
+  return params;
+}
 
 
 VpaidVideoPlayer.prototype._adClickTrough = function() {
