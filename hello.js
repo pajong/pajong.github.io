@@ -88,7 +88,8 @@ VpaidVideoPlayer.prototype.startAd = function() {
     //add overlay image
     var img = document.createElement('img');
     img.src = this._parameters.overlay || '';
-    var closeButton = document.createTextNode("Close");
+    var closeButton = document.createElement('button');
+    closeButton.appendChild(document.createTextNode("Close"));
     closeButton.addEventListener('click', this.skipAd.bind(this), false);
     img.appendChild(closeButton);
     this._slot.appendChild(img);
