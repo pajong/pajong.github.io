@@ -5,8 +5,8 @@ var VpaidVideoPlayer = function() {
     this._parameters = {};
 };
 
-VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode, 
-    desiredBitrate, creativeData, environmentVars) {
+VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
+                                             desiredBitrate, creativeData, environmentVars) {
 
     this._slot = environmentVars.slot;
     this._videoSlot = environmentVars.videoSlot;
@@ -25,7 +25,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
         this._updateVideoSlot();
         this._videoSlot.addEventListener('ended', this.stopAd.bind(this),false);
     }
-    
+
     this._callEvent('AdLoaded');
 };
 
@@ -70,24 +70,27 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
  */
 VpaidVideoPlayer.prototype.startAd = function() {
     if (this._attributes['linear']) {
-      this._videoSlot.play();
+        this._videoSlot.play();
 
-      // add skip button if skippable
-      if (this.getAdSkippableState()) {
-        var skipButton = document.createElement('button');
-        var buttonText = document.createTextNode("Skip");
-        skipButton.appendChild(buttonText);
+        // add skip button if skippable
+        if (this.getAdSkippableState()) {
+            var skipButton = document.createElement('button');
+            var buttonText = document.createTextNode("Skip");
+            skipButton.appendChild(buttonText);
 
-        skipButton.addEventListener('click', this.skipAd.bind(this), false);
-        this._slot.appendChild(skipButton);
-      }
+            skipButton.addEventListener('click', this.skipAd.bind(this), false);
+            this._slot.appendChild(skipButton);
+        }
 
-      this._callEvent('AdStarted');
+        this._callEvent('AdStarted');
     }
 
     //add overlay image
     var img = document.createElement('img');
     img.src = this._parameters.overlay || '';
+    var closeButton = document.createTextNode("Close");
+    closeButton.addEventListener('click', this.skipAd.bind(this), false);
+    img.appendChild(closeButton);
     this._slot.appendChild(img);
     img.addEventListener('click', this._adClickTrough.bind(this), false);
 };
@@ -136,7 +139,7 @@ VpaidVideoPlayer.prototype.resizeAd = function(width, height, viewMode) {
             this._videoSlot.setAttribute('height', height);
             this._videoSlot.style.width = width + 'px';
             this._videoSlot.style.height = height + 'px';
-        } catch (e) { 
+        } catch (e) {
             console.log('Could not resize video ad');
         }
     }
