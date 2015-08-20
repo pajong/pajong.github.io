@@ -5,7 +5,6 @@ var VpaidVideoPlayer = function() {
     this._attributes = {
         'companions' : '',
         'desiredBitrate' : 256,
-        'duration' : 10,
         'expanded' : false,
         'height' : 0,
         'icons' : '',
