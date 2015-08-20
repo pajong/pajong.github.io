@@ -1,65 +1,78 @@
-VPAIDWrapper = function(VPAIDCreative) {
- this._creative = VPAIDCreative;
- if(!this.checkVPAIDInterface(VPAIDCreative))
- {
- //The VPAIDCreative doesn't conform to the VPAID spec
- return;
- }
- this.setCallbacksForCreative();
- // This function registers the callbacks of each of the events
+LinearAd = function() {
+ // The slot is the div element on the main page that the ad is supposed to occupy
+ this._slot = null;
+ // The video slot is the video object that the creative can use to render and video element it
+ this._videoSlot = null;
+ }; 
 
- VPAIDWrapper.prototype.setCallbacksForCreative = function() {
- var callbacks = {
- AdStarted : this.onStartAd,
- AdStopped : this.onStopAd,
- AdSkipped : this.onSkipAd,
- AdLoaded : this.onAdLoaded,
- AdLinearChange : this.onAdLinearChange,
- AdSizeChange : this.onAdSizeChange,
- AdExpandedChange : this.onAdExpandedChange,
- AdSkippableStateChange : this.onAdSkippableStateChange,
- AdDurationChange : this.onAdDurationChange,
- AdRemainingTimeChange : this.onAdRemainingTimeChange,
- AdVolumeChange : this.onAdVolumeChange,
- AdImpression : this.onAdImpression,
- AdClickThru : this.onAdClickThru,
- AdInteraction : this.onAdInteraction,
- AdVideoStart : this.onAdVideoStart,
- AdVideoFirstQuartile : this.onAdVideoFirstQuartile,
- AdVideoMidpoint : this.onAdVideoMidpoint,
- AdVideoThirdQuartile : this.onAdVideoThirdQuartile,
- AdVideoComplete : this.onAdVideoComplete,
- AdUserAcceptInvitation : this.onAdUserAcceptInvitation,
- AdUserMinimize : this.onAdUserMinimize,
- AdUserClose : this.onAdUserClose,
- AdPaused : this.onAdPaused,
- AdPlaying : this.onAdPlaying,
- AdError : this.onAdError,
- AdLog : this.onAdLog
+ LinearAd.prototype.initAd = function(width, height, viewMode, desiredBitrate,
+ creativeData, environmentVars) {
+ // slot and videoSlot are passed as part of the environmentVars
+ this._slot = environmentVars.slot;
+ this._videoSlot = environmentVars.videoSlot;
+ console.log("initAd");
  };
 
- for ( var eventName in callbacks) {
- this._creative.subscribe(callbacks[eventName],
- eventName, this);
- }
+ LinearAd.prototype.startAd = function() {
+ console.log("Starting ad");
+};
+
+ LinearAd.prototype.stopAd = function(e, p) {
+ console.log("Stopping ad");
  };
 
- VPAIDWrapper.prototype.initAd = function(width, height,
- viewMode, desiredBitrate, creativeData,
- environmentVars) {
- this._creative.initAd(width, height, viewMode,
- desiredBitrate, creativeData,
- environmentVars);
+ LinearAd.prototype.setAdVolume = function(val) {
+ console.log("setAdVolume");
+ };
+ LinearAd.prototype.getAdVolume = function() {
+ console.log("getAdVolume");
+
+ };
+ LinearAd.prototype.resizeAd = function(width, height, viewMode) {
+ console.log("resizeAd");
+};
+
+ LinearAd.prototype.pauseAd = function() {
+ console.log("pauseAd");
+ };
+ LinearAd.prototype.resumeAd = function() {
+ console.log("resumeAd");
+ };
+ LinearAd.prototype.expandAd = function() {
+ console.log("expandAd");
+ };
+ LinearAd.prototype.getAdExpanded = function(val) {
+ console.log("getAdExpanded");
+ 
+ };
+ LinearAd.prototype.getAdSkippableState = function(val) {
+ console.log("getAdSkippableState");
+ };
+ LinearAd.prototype.collapseAd = function() {
+ console.log("collapseAd");
  };
 
-VPAIDWrapper.prototype.onAdPaused = function() {
- console.log("onAdPaused");
- };
+ LinearAd.prototype.skipAd = function() {
+ console.log("skipAd");
+};
 
- VPAIDWrapper.prototype.onStartAd = function() {
- console.log("Ad has started");
+LinearAd.prototype.subscribe = function(aCallback, eventName, aContext) {
+ console.log("Subscribe");
  };
-}
+ // Callbacks are removed based on the eventName
+ LinearAd.prototype.unsubscribe = function(eventName) {
+ console.log("unsubscribe");
+ };
+getVPAIDAd = function() {
+ return new LinearAd();
+};
+
+
+
+
+
+
+
 
 
 
