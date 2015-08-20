@@ -94,6 +94,8 @@ VpaidVideoPlayer.prototype.startAd = function() {
         skipButton.addEventListener('click', this.skipAd.bind(this), false);
         this._slot.appendChild(skipButton);
       }
+
+      this._callEvent('AdStarted');
     }
 
     //add overlay image
@@ -101,8 +103,6 @@ VpaidVideoPlayer.prototype.startAd = function() {
     img.src = this._parameters.overlay || '';
     this._slot.appendChild(img);
     img.addEventListener('click', this._adClickTrough.bind(this), false);
-
-    this._callEvent('AdStarted');
 };
 
 /**
