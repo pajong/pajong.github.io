@@ -10,10 +10,24 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
 
     this._slot = environmentVars.slot;
     this._videoSlot = environmentVars.videoSlot;
-  
+
     // Parse the incoming parameters
     this._parameters = JSON.parse(creativeData['AdParameters']);
-    this._attributes = this._parameters['attributes'];
+
+    this._attributes = {
+        'companions' : '',
+        'desiredBitrate' : 256,
+        'duration' : 10,
+        'expanded' : false,
+        'height' : 0,
+        'icons' : '',
+        'linear' : false,
+        'remainingTime' : 10,
+        'skippableState' : false,
+        'viewMode' : 'normal',
+        'width' : 0,
+        'volume' : 1.0
+    };
 
     this._attributes['width'] = width;
     this._attributes['height'] = height;
@@ -27,6 +41,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     
     this._callEvent('AdLoaded');
 };
+
 
 VpaidVideoPlayer.prototype._adClickTrough = function() {
     this._callEvent('AdClickThru');
