@@ -199,8 +199,9 @@ VpaidVideoPlayer.prototype.startAd = function() {
     var skipButton = document.createElement('button');
     var buttonText = document.createTextNode("Skip");
     skipButton.appendChild(buttonText);
-    skipButton.addEventListener('click',
-        this.skipAd());
+    skipButton.addEventListener('click', function() {
+        this.skipAd()
+    });
     this.slot_.appendChild(skipButton);
 
     this.callEvent_('AdStarted');
@@ -320,8 +321,10 @@ VpaidVideoPlayer.prototype.collapseAd = function() {
  */
 VpaidVideoPlayer.prototype.skipAd = function() {
     this.log('skipAd');
-
-    this.callEvent_('AdSkipped');
+    var skippableState = this.attributes_['skippableState'];
+    if (skippableState) {
+        this.callEvent_('AdSkipped');
+    }
 };
 
 
