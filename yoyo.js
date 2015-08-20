@@ -14,6 +14,7 @@ LinearAd = function() {
  };
 
  LinearAd.prototype.startAd = function() {
+ 	this.startTime = new Date();
  console.log("Starting ad");
 };
 
@@ -66,6 +67,14 @@ LinearAd.prototype.subscribe = function(aCallback, eventName, aContext) {
 
  LinearAd.prototype.getAdLinear = function(first_argument) {
  	return true;
+ };
+
+ LinearAd.prototype.getAdRemainingTime = function() {
+ 	return 10000 - (new Date() - this.startTime);
+ };
+
+ LinearAd.prototype.getDuration = function() {
+ 	return 10;
  };
 getVPAIDAd = function() {
  return new LinearAd();
