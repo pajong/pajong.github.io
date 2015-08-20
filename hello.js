@@ -82,23 +82,28 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
  * Called by the wrapper to start the ad.
  */
 VpaidVideoPlayer.prototype.startAd = function() {
-    this._videoSlot.play();
+    if (this._attribute['linear']) {
+      this._videoSlot.play();
+
+      // add skip button if skippable
+      if (this.getAdSkippableState()) {
+        var skipButton = document.createElement('button');
+        var buttonText = document.createTextNode("Skip");
+        skipButton.appendChild(buttonText);
+
+        skipButton.addEventListener('click', this.skipAd.bind(this), false);
+        this._slot.appendChild(skipButton);
+      }
+    }
+
+    //add overlay image
     var img = document.createElement('img');
     img.src = this._parameters.overlay || '';
     this._slot.appendChild(img);
     img.addEventListener('click', this._adClickTrough.bind(this), false);
 
-    // skip button to allow the ad to skip
-    var skipButton = document.createElement('button');
-    var buttonText = document.createTextNode("Skip");
-    skipButton.appendChild(buttonText);
- 
-    skipButton.addEventListener('click', this.skipAd.bind(this), false);
-    this._slot.appendChild(skipButton);
-
     this._callEvent('AdStarted');
 };
-
 
 /**
  * Called by the wrapper to stop the ad.
