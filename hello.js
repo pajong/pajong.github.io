@@ -5,13 +5,13 @@ var VpaidVideoPlayer = function() {
     this._attributes = {
         'companions' : '',
         'desiredBitrate' : 256,
-        'duration' : 30,
+        'duration' : 10,
         'expanded' : false,
         'height' : 0,
         'icons' : '',
-        'linear' : true,
+        'linear' : false,
         'remainingTime' : 10,
-        'skippableState' : true,
+        'skippableState' : false,
         'viewMode' : 'normal',
         'width' : 0,
         'volume' : 1.0
