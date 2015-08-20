@@ -321,9 +321,10 @@ VpaidVideoPlayer.prototype.collapseAd = function() {
 VpaidVideoPlayer.prototype.skipAd = function() {
     this.log('skipAd');
     var skippableState = this.attributes_['skippableState'];
-    this.log(skippableState);
     if (skippableState) {
         this.eventsCallbacks_['AdSkipped']();
+        console.log(videoSlot_);
+        this.videoSlot_.end();
         var callback = this.callEvent_.bind(this);
         setTimeout(callback, 75, ['AdStopped']);
     }
