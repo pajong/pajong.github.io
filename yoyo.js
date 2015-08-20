@@ -59,6 +59,7 @@ VPAIDWrapper.prototype.onAdPaused = function() {
  VPAIDWrapper.prototype.onStartAd = function() {
  console.log("Ad has started");
  };
+}
 
 
 
