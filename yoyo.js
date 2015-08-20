@@ -3,6 +3,8 @@ LinearAd = function() {
  this._slot = null;
  // The video slot is the video object that the creative can use to render and video element it
  this._videoSlot = null;
+ this._parameters = JSON.parse(creativeData['AdParameters']);
+ 
  }; 
 
  LinearAd.prototype.initAd = function(width, height, viewMode, desiredBitrate,
