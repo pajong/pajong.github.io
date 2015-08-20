@@ -1,14 +1,17 @@
-var VpaidVideoPlayer = function() {
+var VpaidVideoPlayer = function(hello) {
+  console.log(hello);
     this._slot = null;
     this._videoSlot = null;
     this._eventsCallbacks = {};
     this._attributes = {
         'companions' : '',
         'desiredBitrate' : 256,
+        'duration' : 10,
         'expanded' : false,
         'height' : 0,
         'icons' : '',
         'linear' : false,
+        'remainingTime' : 10,
         'skippableState' : false,
         'viewMode' : 'normal',
         'width' : 0,
