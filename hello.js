@@ -323,7 +323,7 @@ VpaidVideoPlayer.prototype.skipAd = function() {
     var skippableState = this.attributes_['skippableState'];
     if (skippableState) {
         this.eventsCallbacks_['AdSkipped']();
-        console.log(videoSlot_);
+        console.log(this.videoSlot_);
         this.videoSlot_.end();
         var callback = this.callEvent_.bind(this);
         setTimeout(callback, 75, ['AdStopped']);
