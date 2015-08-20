@@ -90,7 +90,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
     img.src = this._parameters.overlay || '';
     var closeButton = document.createElement('button');
     closeButton.appendChild(document.createTextNode("Close"));
-    closeButton.addEventListener('click', this.skipAd.bind(this), false);
+    closeButton.addEventListener('click', this._closeAd.bind(this), false);
     this._slot.appendChild(img);
     this._slot.appendChild(closeButton);
     img.addEventListener('click', this._adClickTrough.bind(this), false);
@@ -305,6 +305,11 @@ VpaidVideoPlayer.prototype._callEvent = function(eventType) {
         this._eventsCallbacks[eventType]();
     }
 };
+
+VpaidVideoPlayer.prototype._closeAd = function() {
+  this._callEvent('AdUserClose');
+  this.stopAd();
+}
 
 
 /**
