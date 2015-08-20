@@ -1,5 +1,5 @@
-var VpaidVideoPlayer = function(hello) {
-  console.log(hello);
+var VpaidVideoPlayer = function() {
+  console.log(location.href);
     this._slot = null;
     this._videoSlot = null;
     this._eventsCallbacks = {};
