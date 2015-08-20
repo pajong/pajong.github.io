@@ -25,7 +25,7 @@ var VpaidVideoPlayer = function() {
         'icons' : '',
         'linear' : true,
         'remainingTime' : 10,
-        'skippableState' : false,
+        'skippableState' : true,
         'viewMode' : 'normal',
         'width' : 0,
         'volume' : 1.0
@@ -320,7 +320,11 @@ VpaidVideoPlayer.prototype.collapseAd = function() {
  */
 VpaidVideoPlayer.prototype.skipAd = function() {
     this.log('skipAd');
-    this.callEvent_('AdSkipped');
+    var skippableState = this.attributes_['skippableState'];
+    this.log(skippableState);
+    if (skippableState) {
+        this.callEvent_('AdSkipped');
+    }
 };
 
 
@@ -334,7 +338,7 @@ VpaidVideoPlayer.prototype.subscribe = function(
     aCallback,
     eventName,
     aContext) {
-    this.log('Subscribe ' + eventName);
+    this.log('Subscribe ' + aCallback);
     var callBack = aCallback.bind(aContext);
     this.eventsCallbacks_[eventName] = callBack;
 };
