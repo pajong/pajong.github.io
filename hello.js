@@ -9,7 +9,6 @@ var VpaidVideoPlayer = function() {
         'height' : 0,
         'icons' : '',
         'linear' : false,
-        'remainingTime' : 10,
         'skippableState' : false,
         'viewMode' : 'normal',
         'width' : 0,
