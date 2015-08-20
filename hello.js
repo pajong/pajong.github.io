@@ -320,10 +320,8 @@ VpaidVideoPlayer.prototype.collapseAd = function() {
  */
 VpaidVideoPlayer.prototype.skipAd = function() {
     this.log('skipAd');
-    var skippableState = this.attributes_['skippableState'];
-    if (skippableState) {
-        this.callEvent_('AdSkipped');
-    }
+
+    this.callEvent_('AdSkipped');
 };
 
 
