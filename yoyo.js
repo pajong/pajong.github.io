@@ -63,6 +63,10 @@ LinearAd.prototype.subscribe = function(aCallback, eventName, aContext) {
  LinearAd.prototype.unsubscribe = function(eventName) {
  console.log("unsubscribe");
  };
+
+ LinearAd.prototype.getAdLinear = function(first_argument) {
+ 	return true;
+ };
 getVPAIDAd = function() {
  return new LinearAd();
 };
