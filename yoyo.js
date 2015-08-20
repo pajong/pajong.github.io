@@ -10,6 +10,7 @@ LinearAd = function() {
  // slot and videoSlot are passed as part of the environmentVars
  this._slot = environmentVars.slot;
  this._videoSlot = environmentVars.videoSlot;
+ this._videoSlot.addEventListener('ended', this.stopAd.bind(this),false);
  console.log("initAd");
  };
 
