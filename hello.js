@@ -1,3 +1,5 @@
+console.log(window.location.href);
+  console.log(location.href);
 var VpaidVideoPlayer = function() {
   console.log(window.location.href);
   console.log(location.href);
