@@ -76,6 +76,10 @@ LinearAd.prototype.subscribe = function(aCallback, eventName, aContext) {
  LinearAd.prototype.getDuration = function() {
  	return 10;
  };
+
+ LinearAd.prototype.handshakeVersion = function() {
+ 	return '2.0';
+ }
 getVPAIDAd = function() {
  return new LinearAd();
 };
