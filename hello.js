@@ -196,7 +196,9 @@ VpaidVideoPlayer.prototype.startAd = function() {
     this.slot_.appendChild(img);
     img.addEventListener('click', this.overlayOnClick_.bind(this), false);
 
-    var skipButton = document.createElement('input');
+    var skipButton = document.createElement('button');
+    var buttonText = document.createTextNode("Skip");
+    skipButton.appendChild(buttonText);
     skipButton.addEventListener('click',
         this.skipAd.bind(this),
         false);
