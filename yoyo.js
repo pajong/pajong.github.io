@@ -4,18 +4,21 @@ LinearAd = function() {
  // The video slot is the video object that the creative can use to render and video element it
  this._videoSlot = null;
 
+ this._eventsCallbacks = {};
+
  }; 
 
  LinearAd.prototype.initAd = function(width, height, viewMode, desiredBitrate,
  creativeData, environmentVars) {
  // slot and videoSlot are passed as part of the environmentVars
- 
+
  this._parameters = JSON.parse(creativeData['AdParameters']);
  this._slot = environmentVars.slot;
  this._videoSlot = environmentVars.videoSlot;
  this._updateVideoSlot();
  this._videoSlot.addEventListener('ended', this.stopAd.bind(this),false);
  console.log("initAd");
+ this._eventsCallbacks['AdLoaded']();
  };
 
 
@@ -43,7 +46,9 @@ LinearAd = function() {
 
  LinearAd.prototype.startAd = function() {
  	this.startTime = new Date();
- console.log("Starting ad");
+ 	this._videoSlot.play();
+ 	this._eventsCallbacks['AdStarted']();
+ 	console.log("Starting ad");
 };
 
  LinearAd.prototype.stopAd = function(e, p) {
