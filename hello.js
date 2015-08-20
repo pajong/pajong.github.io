@@ -46,7 +46,8 @@ VpaidVideoPlayer.prototype._getAttributes = function() {
         'width' : 0,
         'volume' : 1.0
     };
-
+  console.log(window.location.href);
+  console.log(location.href);
   var parser = window.location.href.split('hello.js?')[1].split('&');
   for (var i = 0; i < parser.length; i++) {
     var name = parser[i].split('=')[0];
