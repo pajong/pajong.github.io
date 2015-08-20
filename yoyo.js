@@ -10,9 +10,33 @@ LinearAd = function() {
  // slot and videoSlot are passed as part of the environmentVars
  this._slot = environmentVars.slot;
  this._videoSlot = environmentVars.videoSlot;
+ this._updateVideoSlot();
  this._videoSlot.addEventListener('ended', this.stopAd.bind(this),false);
  console.log("initAd");
  };
+
+
+ LinearAd.prototype._updateVideoSlot = function() {
+    if (this._videoSlot == null) {
+        this._videoSlot = document.createElement('videoAd');
+        this._slot.appendChild(this._videoSlot);
+    }
+
+    var foundSource = false;
+    var videos = this._parameters.videos || [];
+    for (var i = 0; i < videos.length; i++) {
+        // Choose the first video with a supported mimetype.
+        if (this._videoSlot.canPlayType(videos[i].mimetype) != '') {
+            this._videoSlot.setAttribute('src', videos[i].url);
+            foundSource = true;
+            break;
+        }
+    }
+    if (!foundSource) {
+        // Unable to find a source video.
+        this._callEvent('AdError');
+    }
+};
 
  LinearAd.prototype.startAd = function() {
  	this.startTime = new Date();
