@@ -338,7 +338,8 @@ VpaidVideoPlayer.prototype.subscribe = function(
     aCallback,
     eventName,
     aContext) {
-    this.log('Subscribe ' + aCallback);
+    this.log('Subscribe ' + eventName + '  -> ');
+    this.log(aContext);
     var callBack = aCallback.bind(aContext);
     this.eventsCallbacks_[eventName] = callBack;
 };
