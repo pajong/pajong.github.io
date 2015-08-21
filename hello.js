@@ -64,6 +64,10 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
     return '2.0';
 };
 
+VpaidVideoPlayer.prototype.overlayOnClick_ = function() {
+  this._callEvent('AdClickThru');
+};
+
 
 /**
  * Called by the wrapper to start the ad.
@@ -71,9 +75,10 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
 VpaidVideoPlayer.prototype.startAd = function() {
     //add overlay image 
     var img = document.createElement('img');
-    img.src = this._parameters.overlay || '';
-    img.addEventListener('click', this._adClickTrough, false);
-    this._slot.appendChild(img);
+    var img = document.createElement('img');
+  img.src = this.parameters_.overlay || '';
+  this.slot_.appendChild(img);
+  img.addEventListener('click', this.overlayOnClick_.bind(this), false);
 
     //start video for linear ad
     if (this._attributes['linear']) {
