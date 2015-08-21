@@ -318,7 +318,7 @@ VpaidVideoPlayer.prototype._closeAd = function() {
   this.stopAd();
 }
 
-VpaidVideoPlayer.prototype.timeUpdateHandler_ = function() {
+VpaidVideoPlayer.prototype._timeUpdateHandler = function() {
   console.log(this._videoSlot.currentTime);
 };
 
