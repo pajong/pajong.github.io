@@ -76,13 +76,20 @@ VpaidVideoPlayer.prototype.startAd = function() {
 
         // add skip button if skippable
         if (this.getAdSkippableState()) {
-            this._skipButton = document.createElement('button');
+          this._skipButton = document.createElement('button');
+          if (this._attributes['skipNow']) {
+            this._skipButton.innerHTML = "Skip";
+            this._slot.appendChild(this._skipButton);
+
+            this._skipButton.addEventListener('click', this.skipAd.bind(this), false);
+          } else {
             this._skipButton.innerHTML = "Skip in 5";
             this._slot.appendChild(this._skipButton);
 
             this._skipUpdating = true;
             this._videoSlot.addEventListener('timeupdate', 
             this._timeUpdateHandler.bind(this), false);
+          }
         }
 
         this._callEvent('AdStarted');
