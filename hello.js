@@ -69,9 +69,16 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
  * Called by the wrapper to start the ad.
  */
 VpaidVideoPlayer.prototype.startAd = function() {
+    //add overlay image 
+    var img = document.createElement('img');
+    img.src = this._parameters.overlay || '';
+    img.addEventListener('click', this._adClickTrough.bind(this), false);
+    this._slot.appendChild(img);
+
+    //start video for linear ad
     if (this._attributes['linear']) {
         this._videoSlot.play();
-        this._videoSlot.addEventListener('click', this._callEvent('AdClickThru', this), false);
+        this._slot.addEventListener('click', this._callEvent('AdClickThru', this), false);
 
         // add skip button if skippable
         if (this.getAdSkippableState()) {
@@ -88,15 +95,11 @@ VpaidVideoPlayer.prototype.startAd = function() {
         return;
     } 
 
-    //add overlay image  
-    var img = document.createElement('img');
-    img.src = this._parameters.overlay || '';
+    //add close button for non linear ad 
     var closeButton = document.createElement('button');
     closeButton.appendChild(document.createTextNode("Close"));
     closeButton.addEventListener('click', this._closeAd.bind(this), false);
-    this._slot.appendChild(img);
     this._slot.appendChild(closeButton);
-    img.addEventListener('click', this._adClickTrough.bind(this), false);
 };
 
 /**
