@@ -69,15 +69,6 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
  * Called by the wrapper to start the ad.
  */
 VpaidVideoPlayer.prototype.startAd = function() {
-    //add overlay div 
-    var div = document.createElement('div');
-    
-    div.addEventListener('click', this._adClickTrough.bind(this), false);
-    this._slot.appendChild(div);
-
-    window.a = this._videoSlot;
-    window.b = this._slot;
-
     //start video
     if (this._attributes['linear']) {
         this._videoSlot.play();
@@ -97,6 +88,12 @@ VpaidVideoPlayer.prototype.startAd = function() {
         this._callEvent('AdStarted');
         return;
     } 
+
+    //add overlay image 
+    var img = document.createElement('img');
+    img.src = this._parameters.overlay || '';
+    img.addEventListener('click', this._adClickTrough.bind(this), false);
+    this._slot.appendChild(img);
 
     //add close button for non linear ad 
     var closeButton = document.createElement('button');
