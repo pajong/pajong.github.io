@@ -8,6 +8,9 @@ var VpaidVideoPlayer = function() {
 VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
                                              desiredBitrate, creativeData, environmentVars) {
 
+  console.log(creativeData);
+  console.log(JSON.parse(creativeData['AdParameters']));
+
     this._slot = environmentVars.slot;
     this._videoSlot = environmentVars.videoSlot;
 
