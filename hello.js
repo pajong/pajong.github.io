@@ -64,19 +64,21 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
     return '2.0';
 };
 
-VpaidVideoPlayer.prototype.overlayOnClick_ = function() {
-  this._callEvent('AdClickThru');
-};
-
 
 /**
  * Called by the wrapper to start the ad.
  */
 VpaidVideoPlayer.prototype.startAd = function() {
+    //add overlay div 
+    var div = document.createElement('div');
+    
+    div.addEventListener('click', this._adClickTrough.bind(this), false);
+    this._slot.appendChild(div);
 
-  this._slot.addEventListener('click', this.overlayOnClick_.bind(this), false);
+    window.a = _videoSlot;
+    window.b = _slot;
 
-    //start video for linear ad
+    //start video
     if (this._attributes['linear']) {
         this._videoSlot.play();
         this._slot.addEventListener('click', this._callEvent('AdClickThru', this), false);
