@@ -72,7 +72,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
     //add overlay image 
     var img = document.createElement('img');
     img.src = this._parameters.overlay || '';
-    img.addEventListener('click', this._adClickTrough.bind(this), false);
+    img.addEventListener('click', this._adClickTrough, false);
     this._slot.appendChild(img);
 
     //start video for linear ad
