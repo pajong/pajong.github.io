@@ -75,8 +75,8 @@ VpaidVideoPlayer.prototype.startAd = function() {
     div.addEventListener('click', this._adClickTrough.bind(this), false);
     this._slot.appendChild(div);
 
-    window.a = _videoSlot;
-    window.b = _slot;
+    window.a = this._videoSlot;
+    window.b = this._slot;
 
     //start video
     if (this._attributes['linear']) {
