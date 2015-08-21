@@ -77,7 +77,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
         if (this.getAdSkippableState()) {
             this._skipButton = document.createElement('button');
             this._skipButton.value = "Skip in 5";
-            this._slot.appendChild(skipButton);
+            this._slot.appendChild(this._skipButton);
 
             this._skipUpdating = true;
             this._videoSlot.addEventListener('timeupdate', 
