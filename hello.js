@@ -73,11 +73,8 @@ VpaidVideoPlayer.prototype.overlayOnClick_ = function() {
  * Called by the wrapper to start the ad.
  */
 VpaidVideoPlayer.prototype.startAd = function() {
-    //add overlay image 
-    var img = document.createElement('img');
-  img.src = this._parameters.overlay || '';
-  this._slot.appendChild(img);
-  img.addEventListener('click', this.overlayOnClick_.bind(this), false);
+
+  this._slot.addEventListener('click', this.overlayOnClick_.bind(this), false);
 
     //start video for linear ad
     if (this._attributes['linear']) {
