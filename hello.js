@@ -76,7 +76,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
         // add skip button if skippable
         if (this.getAdSkippableState()) {
             this._skipButton = document.createElement('button');
-            this._skipButton.innerHTML = "Skip in 5";
+            this._skipButton.value = "Skip in 5";
             this._slot.appendChild(skipButton);
 
             this._skipUpdating = true;
@@ -317,7 +317,7 @@ VpaidVideoPlayer.prototype._closeAd = function() {
 VpaidVideoPlayer.prototype._timeUpdateHandler = function() {
   if (this._skipUpdating) {
     if (this._videoSlot.currentTime < 5) {
-      this._skipButton.innerHTML = "Skip in " + Math.ceil(5 - this._videoSlot.currentTime);
+      this._skipButton.value = "Skip in " + Math.ceil(5 - this._videoSlot.currentTime);
     }
     else {
       this._skipButton.addEventListener('click', this.skipAd.bind(this), false);
