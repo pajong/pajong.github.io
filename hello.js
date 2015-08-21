@@ -72,20 +72,15 @@ VpaidVideoPlayer.prototype.startAd = function() {
     if (this._attributes['linear']) {
         this._videoSlot.play();
 
-        // track start time
-        this._videoStartTime = new Date();
-
-        this._videoSlot.addEventListener('timeupdate', 
-          this._timeUpdateHandler.bind(this), false);
-
         // add skip button if skippable
         if (this.getAdSkippableState()) {
-            var skipButton = document.createElement('button');
-            var buttonText = document.createTextNode("Skip");
-            skipButton.appendChild(buttonText);
-
-            skipButton.addEventListener('click', this.skipAd.bind(this), false);
+            this._skipButton = document.createElement('button');
+            this._skipButton.innerHTML = "Skip in 5";
             this._slot.appendChild(skipButton);
+
+            this._skipUpdating = true;
+            this._videoSlot.addEventListener('timeupdate', 
+            this._timeUpdateHandler.bind(this), false);
         }
 
         this._callEvent('AdStarted');
@@ -319,7 +314,15 @@ VpaidVideoPlayer.prototype._closeAd = function() {
 }
 
 VpaidVideoPlayer.prototype._timeUpdateHandler = function() {
-  console.log(this._videoSlot.currentTime);
+  if (this._skipUpdating) {
+    if (this._videoSlot.currentTime < 5) {
+      this._skipButton.innerHTML = "Skip in " + Math.ceil(5 - this._videoSlot.currentTime);
+    }
+    else {
+      this._skipButton.addEventListener('click', this.skipAd.bind(this), false);
+      this._skipUpdating = false;
+    }
+  }  
 };
 
 
