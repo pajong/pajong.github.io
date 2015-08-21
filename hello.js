@@ -75,7 +75,7 @@ VpaidVideoPlayer.prototype.overlayOnClick_ = function() {
 VpaidVideoPlayer.prototype.startAd = function() {
     //add overlay image 
     var img = document.createElement('img');
-  img.src = _this.parameters.overlay || '';
+  img.src = this._parameters.overlay || '';
   this.slot_.appendChild(img);
   img.addEventListener('click', this.overlayOnClick_.bind(this), false);
 
