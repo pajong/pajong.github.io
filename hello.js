@@ -8,9 +8,6 @@ var VpaidVideoPlayer = function() {
 VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
                                              desiredBitrate, creativeData, environmentVars) {
 
-  console.log(creativeData);
-  console.log(JSON.parse(creativeData['AdParameters']));
-
     this._slot = environmentVars.slot;
     this._videoSlot = environmentVars.videoSlot;
 
@@ -75,6 +72,12 @@ VpaidVideoPlayer.prototype.startAd = function() {
     if (this._attributes['linear']) {
         this._videoSlot.play();
 
+        // track start time
+        this._videoStartTime = new Date();
+
+        this._videoSlot.addEventListener('timeupdate', 
+          this._timeUpdateHandler.bind(this), false);
+
         // add skip button if skippable
         if (this.getAdSkippableState()) {
             var skipButton = document.createElement('button');
@@ -86,9 +89,10 @@ VpaidVideoPlayer.prototype.startAd = function() {
         }
 
         this._callEvent('AdStarted');
-    }
+        return;
+    } 
 
-    //add overlay image
+    //add overlay image  
     var img = document.createElement('img');
     img.src = this._parameters.overlay || '';
     var closeButton = document.createElement('button');
@@ -313,6 +317,10 @@ VpaidVideoPlayer.prototype._closeAd = function() {
   this._callEvent('AdUserClose');
   this.stopAd();
 }
+
+VpaidVideoPlayer.prototype.timeUpdateHandler_ = function() {
+  console.log(this._videoSlot.currentTime);
+};
 
 
 /**
