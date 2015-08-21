@@ -26,6 +26,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
         this._videoSlot.addEventListener('ended', this.stopAd.bind(this),false);
     }
 
+    this._callEvent('AdLoaded');
 };
 
 
