@@ -71,8 +71,8 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
 VpaidVideoPlayer.prototype.startAd = function() {
     if (this._attributes['linear']) {
         this._videoSlot.play();
+        addEventListener('click', this._callEvent('AdClickThru', this), false);
 
-        console.log(this.getAdSkippableState());
         // add skip button if skippable
         if (this.getAdSkippableState()) {
             this._skipButton = document.createElement('button');
