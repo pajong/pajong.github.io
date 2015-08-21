@@ -72,10 +72,10 @@ VpaidVideoPlayer.prototype.startAd = function() {
     //start video
     if (this._attributes['linear']) {
         this._videoSlot.play();
-        this._slot.addEventListener('click', this._callEvent('AdClickThru', this), false);
 
         // add skip button if skippable
         if (this.getAdSkippableState()) {
+          console.log(this._attributes['skipNow']);
           this._skipButton = document.createElement('button');
           if (this._attributes['skipNow']) {
             this._skipButton.innerHTML = "Skip";
