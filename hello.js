@@ -320,6 +320,7 @@ VpaidVideoPlayer.prototype._timeUpdateHandler = function() {
       this._skipButton.innerHTML = "Skip in " + Math.ceil(5 - this._videoSlot.currentTime);
     }
     else {
+      this._skipButton.innerHTML = "Skip";
       this._skipButton.addEventListener('click', this.skipAd.bind(this), false);
       this._skipUpdating = false;
     }
