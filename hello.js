@@ -3,6 +3,9 @@ var VpaidVideoPlayer = function() {
     this._videoSlot = null;
     this._eventsCallbacks = {};
     this._parameters = {};
+
+    {"overlay":"http://ds.serving-sys.com/BurstingRes/Site-67593/Type-0/1ef22bf9-1958-4993-a30c-0d8ac43efdc3.jpg",
+    
 };
 
 VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
@@ -14,7 +17,21 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     // Parse the incoming parameters
     this._parameters = JSON.parse(creativeData['AdParameters']);
 
-    this._attributes = this._parameters['attributes'];
+    this._attributes = "attributes": {
+        "companions" : "",
+        "desiredBitrate" : 256,
+        "duration":10,
+        "expanded" : false,
+        "height" : 0,
+        "icons" : "",
+        "linear" : false,
+        "remainingTime" : 10,
+        "skippableState" : false,
+        "viewMode" : "normal",
+        "width" : 0,
+        "volume" : 1.0
+        }
+    }
 
     this._attributes['width'] = width;
     this._attributes['height'] = height;
