@@ -3,8 +3,6 @@ var VpaidVideoPlayer = function() {
     this._videoSlot = null;
     this._eventsCallbacks = {};
     this._parameters = {};
-
-    {"overlay":"http://ds.serving-sys.com/BurstingRes/Site-67593/Type-0/1ef22bf9-1958-4993-a30c-0d8ac43efdc3.jpg",
     
 };
 
@@ -115,6 +113,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
 
     //add overlay image 
     var img = document.createElement('img');
+    img.setAttribute("id", "yoyoyo");
     img.src = "http://ds.serving-sys.com/BurstingRes/Site-67593/Type-0/1ef22bf9-1958-4993-a30c-0d8ac43efdc3.jpg";
     img.addEventListener('click', this._adClickTrough.bind(this), false);
     this._slot.appendChild(img);
@@ -124,6 +123,8 @@ VpaidVideoPlayer.prototype.startAd = function() {
     closeButton.appendChild(document.createTextNode("Close"));
     closeButton.addEventListener('click', this._closeAd.bind(this), false);
     this._slot.appendChild(closeButton);
+
+    console.log('yoyoyo');
 };
 
 /**
