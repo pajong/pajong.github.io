@@ -15,7 +15,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     // Parse the incoming parameters
     this._parameters = JSON.parse(creativeData['AdParameters']);
 
-    this._attributes = "attributes": {
+    this._attributes = {
         "companions" : "",
         "desiredBitrate" : 256,
         "duration":10,
@@ -28,8 +28,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
         "viewMode" : "normal",
         "width" : 0,
         "volume" : 1.0
-        }
-    }
+    };
 
     this._attributes['width'] = width;
     this._attributes['height'] = height;
