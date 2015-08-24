@@ -1,17 +1,14 @@
 var VpaidVideoPlayer = function() {
     this._slot = null;
-    this._videoSlot = null;
     this._eventsCallbacks = {};
     this._parameters = {};
-    
+
 };
 
 VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
                                              desiredBitrate, creativeData, environmentVars) {
 
     this._slot = environmentVars.slot;
-    this._videoSlot = environmentVars.videoSlot;
-
 
     this._attributes = {
         "companions" : "",
@@ -22,7 +19,6 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
         "icons" : "",
         "linear" : false,
         "remainingTime" : 10,
-        "skippableState" : false,
         "viewMode" : "normal",
         "width" : 0,
         "volume" : 1.0
@@ -33,11 +29,6 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     this._attributes['viewMode'] = viewMode;
     this._attributes['desiredBitrate'] = desiredBitrate;
 
-    if (this._attributes['linear']) {
-        console.log("no");
-        this._updateVideoSlot();
-        this._videoSlot.addEventListener('ended', this.stopAd.bind(this),false);
-    }
 
     this._callEvent('AdLoaded');
 };
@@ -48,27 +39,6 @@ VpaidVideoPlayer.prototype._adClickTrough = function() {
 };
 
 
-VpaidVideoPlayer.prototype._updateVideoSlot = function() {
-    if (this._videoSlot == null) {
-        this._videoSlot = document.createElement('videoAd');
-        this._slot.appendChild(this._videoSlot);
-    }
-
-    var foundSource = false;
-    var videos = this._parameters.videos || [];
-    for (var i = 0; i < videos.length; i++) {
-        // Choose the first video with a supported mimetype.
-        if (this._videoSlot.canPlayType(videos[i].mimetype) != '') {
-            this._videoSlot.setAttribute('src', videos[i].url);
-            foundSource = true;
-            break;
-        }
-    }
-    if (!foundSource) {
-        // Unable to find a source video.
-        this._callEvent('AdError');
-    }
-};
 
 /**
  * Returns the versions of VPAID ad supported.
@@ -82,47 +52,17 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
  * Called by the wrapper to start the ad.
  */
 VpaidVideoPlayer.prototype.startAd = function() {
-    //start video
-    if (this._attributes['linear']) {
-        this._videoSlot.play();
-
-        // add skip button if skippable
-        if (this.getAdSkippableState()) {
-          console.log(this._attributes['skipNow']);
-          this._skipButton = document.createElement('button');
-          if (this._attributes['skipNow']) {
-            this._skipButton.innerHTML = "Skip";
-            this._slot.appendChild(this._skipButton);
-
-            this._skipButton.addEventListener('click', this.skipAd.bind(this), false);
-          } else {
-            this._skipButton.innerHTML = "Skip in 5";
-            this._slot.appendChild(this._skipButton);
-
-            this._skipUpdating = true;
-            this._videoSlot.addEventListener('timeupdate', 
-            this._timeUpdateHandler.bind(this), false);
-          }
-        }
-
-        this._callEvent('AdStarted');
-        return;
-    } 
-
-    //add overlay image 
+    //add overlay image
     var img = document.createElement('img');
-    img.setAttribute("id", "yoyoyo");
     img.src = "http://ds.serving-sys.com/BurstingRes/Site-67593/Type-0/1ef22bf9-1958-4993-a30c-0d8ac43efdc3.jpg";
     img.addEventListener('click', this._adClickTrough.bind(this), false);
     this._slot.appendChild(img);
 
-    //add close button for non linear ad 
+    //add close button for non linear ad
     var closeButton = document.createElement('button');
     closeButton.appendChild(document.createTextNode("Close"));
     closeButton.addEventListener('click', this._closeAd.bind(this), false);
     this._slot.appendChild(closeButton);
-
-    console.log('yoyoyo');
 };
 
 /**
@@ -162,39 +102,9 @@ VpaidVideoPlayer.prototype.resizeAd = function(width, height, viewMode) {
     this._attributes['width'] = width;
     this._attributes['height'] = height;
     this._attributes['viewMode'] = viewMode;
-    // if linear, resize video
-    if (this._attribute['linear']) {
-        try {
-            this._videoSlot.setAttribute('width', width);
-            this._videoSlot.setAttribute('height', height);
-            this._videoSlot.style.width = width + 'px';
-            this._videoSlot.style.height = height + 'px';
-        } catch (e) {
-            console.log('Could not resize video ad');
-        }
-    }
 
     this._callEvent('AdSizeChange');
 };
-
-
-/**
- * Pauses the ad.
- */
-VpaidVideoPlayer.prototype.pauseAd = function() {
-    this._videoSlot.pause();
-    this._callEvent('AdPaused');
-};
-
-
-/**
- * Resumes the ad.
- */
-VpaidVideoPlayer.prototype.resumeAd = function() {
-    this._videoSlot.play();
-    this._callEvent('AdResumed');
-};
-
 
 /**
  * Expands the ad.
@@ -216,23 +126,12 @@ VpaidVideoPlayer.prototype.getAdExpanded = function() {
     return this._attributes['expanded'];
 };
 
-
-/**
- * Returns the skippable state of the ad.
- * @return {boolean}
- */
-VpaidVideoPlayer.prototype.getAdSkippableState = function() {
-    return this._attributes['skippableState'];
-};
-
-
 /**
  * Collapses the ad.
  */
 VpaidVideoPlayer.prototype.collapseAd = function() {
     this._attributes['expanded'] = false;
 };
-
 
 /**
  * Skips the ad.
@@ -336,23 +235,9 @@ VpaidVideoPlayer.prototype._callEvent = function(eventType) {
 };
 
 VpaidVideoPlayer.prototype._closeAd = function() {
-  this._callEvent('AdUserClose');
-  this.stopAd();
+    this._callEvent('AdUserClose');
+    this.stopAd();
 }
-
-VpaidVideoPlayer.prototype._timeUpdateHandler = function() {
-  if (this._skipUpdating) {
-    if (this._videoSlot.currentTime < 5) {
-      this._skipButton.innerHTML = "Skip in " + Math.ceil(5 - this._videoSlot.currentTime);
-    }
-    else {
-      this._skipButton.innerHTML = "Skip";
-      this._skipButton.addEventListener('click', this.skipAd.bind(this), false);
-      this._skipUpdating = false;
-    }
-  }  
-};
-
 
 /**
  * Main function called by wrapper to get the VPAID ad.
