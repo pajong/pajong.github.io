@@ -12,8 +12,6 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     this._slot = environmentVars.slot;
     this._videoSlot = environmentVars.videoSlot;
 
-    // Parse the incoming parameters
-    this._parameters = JSON.parse(creativeData['AdParameters']);
 
     this._attributes = {
         "companions" : "",
@@ -36,6 +34,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
     this._attributes['desiredBitrate'] = desiredBitrate;
 
     if (this._attributes['linear']) {
+        console.log("no");
         this._updateVideoSlot();
         this._videoSlot.addEventListener('ended', this.stopAd.bind(this),false);
     }
