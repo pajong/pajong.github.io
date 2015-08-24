@@ -115,7 +115,7 @@ VpaidVideoPlayer.prototype.startAd = function() {
 
     //add overlay image 
     var img = document.createElement('img');
-    img.src = this._parameters.overlay || '';
+    img.src = "http://ds.serving-sys.com/BurstingRes/Site-67593/Type-0/1ef22bf9-1958-4993-a30c-0d8ac43efdc3.jpg";
     img.addEventListener('click', this._adClickTrough.bind(this), false);
     this._slot.appendChild(img);
 
