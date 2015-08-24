@@ -1,5 +1,6 @@
 var VpaidVideoPlayer = function() {
     this._slot = null;
+    this._videoSlot = null;
     this._eventsCallbacks = {};
     this._parameters = {};
 
@@ -9,6 +10,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
                                              desiredBitrate, creativeData, environmentVars) {
 
     this._slot = environmentVars.slot;
+    this._videoSlot = environmentVars.videoSlot;
 
     this._attributes = {
         "companions" : "",
@@ -19,6 +21,7 @@ VpaidVideoPlayer.prototype.initAd = function(width, height, viewMode,
         "icons" : "",
         "linear" : false,
         "remainingTime" : 10,
+        "skippableState" : false,
         "viewMode" : "normal",
         "width" : 0,
         "volume" : 1.0
@@ -106,6 +109,23 @@ VpaidVideoPlayer.prototype.resizeAd = function(width, height, viewMode) {
     this._callEvent('AdSizeChange');
 };
 
+
+/**
+ * Pauses the ad.
+ */
+VpaidVideoPlayer.prototype.pauseAd = function() {
+    this._callEvent('AdPaused');
+};
+
+
+/**
+ * Resumes the ad.
+ */
+VpaidVideoPlayer.prototype.resumeAd = function() {
+    this._callEvent('AdResumed');
+};
+
+
 /**
  * Expands the ad.
  */
@@ -126,12 +146,23 @@ VpaidVideoPlayer.prototype.getAdExpanded = function() {
     return this._attributes['expanded'];
 };
 
+
+/**
+ * Returns the skippable state of the ad.
+ * @return {boolean}
+ */
+VpaidVideoPlayer.prototype.getAdSkippableState = function() {
+    return this._attributes['skippableState'];
+};
+
+
 /**
  * Collapses the ad.
  */
 VpaidVideoPlayer.prototype.collapseAd = function() {
     this._attributes['expanded'] = false;
 };
+
 
 /**
  * Skips the ad.
