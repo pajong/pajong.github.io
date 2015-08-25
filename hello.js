@@ -5,6 +5,34 @@ var VpaidNonLinearPlayer = function() {
 
 };
 
+VpaidNonLinearPlayer.prototype.initAd = function(width, height, viewMode,
+                                             desiredBitrate, creativeData, environmentVars) {
+
+    this._slot = environmentVars.slot;
+
+    this._attributes = {
+        "companions" : "",
+        "desiredBitrate" : 256,
+        "duration":10,
+        "expanded" : false,
+        "height" : 0,
+        "icons" : "",
+        "linear" : false,
+        "remainingTime" : 10,
+        "skippableState" : false,
+        "viewMode" : "normal",
+        "width" : 0,
+        "volume" : 1.0
+    };
+
+    this._attributes['width'] = width;
+    this._attributes['height'] = height;
+    this._attributes['viewMode'] = viewMode;
+    this._attributes['desiredBitrate'] = desiredBitrate;
+
+
+    this._callEvent('AdLoaded');
+};
 
 
 VpaidNonLinearPlayer.prototype._adClickTrough = function() {
