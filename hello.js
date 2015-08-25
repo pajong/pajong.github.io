@@ -49,6 +49,22 @@ VpaidNonLinearPlayer.prototype.handshakeVersion = function(version) {
 };
 
 
+/**
+ * Called by the wrapper to start the ad.
+ */
+VpaidNonLinearPlayer.prototype.startAd = function() {
+    //add overlay image
+    var img = document.createElement('img');
+    img.src = "http://ds.serving-sys.com/BurstingRes/Site-67593/Type-0/1ef22bf9-1958-4993-a30c-0d8ac43efdc3.jpg";
+    img.addEventListener('click', this._adClickTrough.bind(this), false);
+    this._slot.appendChild(img);
+
+    //add close button for non linear ad
+    var closeButton = document.createElement('button');
+    closeButton.appendChild(document.createTextNode("Close"));
+    closeButton.addEventListener('click', this._closeAd.bind(this), false);
+    this._slot.appendChild(closeButton);
+};
 
 /**
  * Called by the wrapper to stop the ad.
