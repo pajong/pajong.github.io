@@ -71,7 +71,6 @@ VpaidVideoPlayer.prototype.handshakeVersion = function(version) {
 VpaidVideoPlayer.prototype.startAd = function() {
     if (this._attributes['linear']) {
         this._videoSlot.play();
-        this._videoSlot.addEventListener('click', this._adClickTrough.bind(this), false);
 
         // add skip button if skippable
         if (this.getAdSkippableState()) {
@@ -85,6 +84,16 @@ VpaidVideoPlayer.prototype.startAd = function() {
 
         this._callEvent('AdStarted');
     }
+
+    //add overlay image
+    var img = document.createElement('img');
+    img.src = this._parameters.overlay || '';
+    var closeButton = document.createElement('button');
+    closeButton.appendChild(document.createTextNode("Close"));
+    closeButton.addEventListener('click', this.skipAd.bind(this), false);
+    img.appendChild(closeButton);
+    this._slot.appendChild(img);
+    img.addEventListener('click', this._adClickTrough.bind(this), false);
 };
 
 /**
