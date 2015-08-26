@@ -1,0 +1,60 @@
+<VAST version="3.0">
+    <Ad id="1234567">
+        <InLine>
+            <AdSystem>Ad System</AdSystem>
+            <AdTitle>VPAID 2 Linear</AdTitle>
+            <Description>VPAID 2 Linear Video Ad</Description>
+            <Creatives>
+                <Creative sequence="1">
+                    <Linear>
+                        <Duration>00:00:10</Duration>
+                        <TrackingEvents>
+                            <Tracking event="start"><URL><![CDATA[http://localhost/log?start]]></URL></Tracking>
+                            <Tracking event="firstQuartile"><URL><![CDATA[http://localhost/log?firstQuartile]]></URL></Tracking>
+                            <Tracking event="midpoint"><URL><![CDATA[http://localhost/log?midpoint]]></URL></Tracking>
+                            <Tracking event="thirdQuartile"><URL><![CDATA[http://localhost/log?thirdQuartile]]></URL></Tracking>
+                            <Tracking event="complete"><URL><![CDATA[http://localhost/log?complete]]></URL></Tracking>
+                            <Tracking event="mute"><URL><![CDATA[http://localhost/log?mute]]></URL></Tracking>
+                            <Tracking event="unmute"><URL><![CDATA[http://localhost/log?unmute]]></URL></Tracking>
+                            <Tracking event="rewind"><URL><![CDATA[http://localhost/log?rewind]]></URL></Tracking>
+                            <Tracking event="pause"><URL><![CDATA[http://localhost/log?pause]]></URL></Tracking>
+                            <Tracking event="resume"><URL><![CDATA[http://localhost/log?resume]]></URL></Tracking>
+                            <Tracking event="fullscreen"><URL><![CDATA[http://localhost/log?fullscreen]]></URL></Tracking>
+                            <Tracking event="creativeView"><URL><![CDATA[http://localhost/log?creativeView]]></URL></Tracking>
+                            <Tracking event="acceptInvitation"><URL><![CDATA[http://localhost/log?acceptInvitation]]></URL></Tracking>
+                        </TrackingEvents>
+                        <AdParameters>
+                            {"videos":[
+                                {"url":"http://content.bitsontherun.com/videos/1EI2jHpo-52qL9xLP.mp4","mimetype":"video/mp4"}],
+                            "attributes": {
+                                "companions" : "",
+                                "desiredBitrate" : 256,
+                                "duration" : 10,
+                                "expanded" : false,
+                                "height" : 0,
+                                "icons" : "",
+                                "linear" : true,
+                                "remainingTime" : 10,
+                                "skippableState" : true,
+                                "viewMode" : "normal",
+                                "width" : 0,
+                                "volume" : 1.0
+                                }
+                            }
+                        </AdParameters>
+                        <VideoClicks>
+                            <ClickThrough id="GDFP">
+                                <![CDATA[ http://google.com ]]>
+                            </ClickThrough>
+                        </VideoClicks>
+                        <MediaFiles>
+                            <MediaFile apiFramework="VPAID" type="application/javascript">
+                                https://pajong.github.io/hello.js
+                            </MediaFile>
+                        </MediaFiles>
+                    </Linear>
+                </Creative>
+            </Creatives>
+        </InLine>
+    </Ad>
+</VAST>
